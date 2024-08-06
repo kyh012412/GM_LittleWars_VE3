@@ -189,4 +189,101 @@ https://www.youtube.com/watch?v=IONpYgEfk40&list=PLO-mt5Iu5TebYBC5jE3u5LyP2D7np0
 5. 테스트
    1. 정상
 
+### 캐주얼 디펜스 - 적군,아군 구별하는 유닛 만들기 [V19]
+
+#### 아군 유닛 만들기
+
+1. bs idle을 하이라키 창내로 드랍(BS)
+   1. 이름은 BS로 변경
+   2. animator 컴포넌트 추가
+      1. 컨트롤러는 acbs를 추가해준다.
+   3. box collider 2d 추가
+      1. is trigger 체크
+         1. offset -0.4 1
+         2. size 0.6 2
+   4. Particles 폴더내에 Dust를 BS 내로 추가
+   5. State machine 추가
+      1. Class (미정)
+      2. Speed float 1
+      3. Dust gameObject (자식 객체를 끌어다가 넣어주기)
+2. Assets 내에 Scripts 폴더를 만들어주기
+   1. MyType.cs
+   ```cs
+   public class MyType
+   {
+       public enum Unit {Sword, Range, Guard, Wizard, Bullet};
+   }
+   ```
+3. BS내에 객체급으로 만들어 놓은 Class 의 자료형에 unit m 을 검색하여
+   1. Unit of my Type을 선택해준다.
+
+#### 적군 유닛 만들기
+
+1. BS
+   1. pos x -1.5
+2. BS 복사 (RS)
+   1. pos x 1.5
+   2. sprite rs idle로 변경(red sword)
+   3. Filp X를 체크
+   4. animator 내에 controller Acrs로 바꿔준다.
+   5. box collider 2d 내에서 offset x의 값을 0.4로 바꿔준다.
+   6. state machine의 객체급 변수의 speed를 1대신에 -1로 변경
+   7. Rs내의 Dust의
+      1. position을 -0.5가아닌 0.5로 변경
+      2. rotation y의값을 180
+3. Layer를 추가해준다.
+   1. 8번에 Blue
+   2. 9번에 Red
+4. BS에는 Blue layer를 RS는 Red layer를 적용시켜준다.
+
+#### 이동하기
+
+1. 기존에 있는 state이름을 Move로 변경후 그 내부로 이동해준다.
+2. 모든 Unit graph가 Object급으로 dust를가진것은 아니므로 null check가 필요하고
+   1. null check라는 유닛을 사용한다.
+3. par play를 검색하여 유닛을 통하여 파티클 실행
+4. ![[Pasted image 20240806183031.png]]
+   ![[Pasted image 20240806183150.png]]
+
+#### 적군 감지
+
+1. fixedupdate 물리 효과를 처리하는 생명주기
+2. state machine의 trigger unity event 유닛을 넣어준다.
+3. 슈퍼유닛 추가 (Macros 내에 SuperUnit 폴더사용)(ScanEnemy)
+   1. physics 2d raycast 유닛을 검색
+      1. 매개변수가 4개있는 유닛을 선택
+   2. 2번째 매개변수에 빔을 쏘는방향을 넣어야 하는데
+   3. 빔을 쏘는 대상에 따라 방향이 달라지므로 새로운 script machine을 추가해준다.(TeamValue)
+4. TeamValue (script machine) (슈퍼유닛)
+   1. trigger input은 없어도 되며
+   2. data에 blue (Object / (game object아님))과 red (Object)를 추가해준다.
+   3. game object get layer 유닛 추가(layer 값은 int이다.)
+   4. output도 trigger없이 반환값만 Object형태로 마늘어준다.
+   5. ![[Pasted image 20240806194317.png]]
+5. 다시 ScanEnemy로 돌아와서
+   1. TeamValue 유닛을 넣어주고 Vector3 right 유닛을 넣어준다.
+   2. select on enum을 선택
+      1. EnumType을 unit of my type으로 해준다.
+   3. Layer와 Layer Mask는 다른것
+      1. get mask 검색하여서
+      2. layer mask : get mask 유닛을 가져온다.
+   4. ![[Pasted image 20240806221329.png]]
+   5. raycast hit 2d transform유닛 추가
+   6. output trigger는 2개를 주고 Scan과 Null로 해준다.
+   7. ![[Pasted image 20240806224419.png]]
+6. 다시 BS > Move graph로 이동해준다.
+   1. ![[Pasted image 20240806225611.png]]
+7. 새로운 script state를 만들어준다.(Attack)
+8. transition세팅
+9. Attack 내에서 구성
+   1. ![[Pasted image 20240806230227.png]]
+10. Attack > Move transition 연결해주기
+
+#### 아군 감지
+
+1. ScanEnemy를 복사해준다.(ScanAlly)
+   1. ![[Pasted image 20240806230745.png]]
+2. Bs > Move 내에서
+   1. ![[Pasted image 20240806231700.png]]
+
 ###
