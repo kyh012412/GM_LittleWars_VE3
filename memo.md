@@ -106,4 +106,87 @@ https://www.youtube.com/watch?v=IONpYgEfk40&list=PLO-mt5Iu5TebYBC5jE3u5LyP2D7np0
    1. 씬급 변수에 올바른 값이 들어가는 지 확인
    2.
 
+### 캐주얼 디펜스 - 패럴랙스를 곁들인 📷카메라 이동 [V18]
+
+#### 사전 준비
+
+카메라 이동에 대한 제어
+
+1. 설정
+   1. 캔버스는 pixel perpect라는 기능이 따로 있음
+      1. Canvas 컴포넌트 내에서 Pixel Perfect를 체크
+   2. Menu Set 비활성화 (작업을 위해)
+   3. Game Set 활성화
+   4. Bases 활성화
+   5. 씬급 변수 Level은 Easy로 설정 후 작업
+   6. 카메라 포지션을 x 값을 -2로 설정
+      1. 카메라내의 x의 범위는 -2에서 2까지 범위임을 인지
+2. Camera Script machine을 만들어줌
+   1. 객체급 변수로 Speed (float), isMove(boolean)을 만들어준다.
+
+#### 스크롤 버튼
+
+대상이 모바일 이기에 ui버튼을 넣어서 제어예정
+
+1. Game Set 내에 빈객체 추가(Control Set)
+   1. 앵커 최대크기
+2. Control Set내에 버튼 추가(Button Right)
+   1. 20:30
+   2. 앵커 우하단
+   3. x -2 y 6
+   4. 소스 이미지 Panel
+3. Button Right 내의 Text
+   1. 폰트 네오둥근모꼴
+   2. 라벨 ▶
+   3. 폰트 크기 16
+   4. 볼드
+   5. 색상 38385B
+4. Button Right으로돌아와서
+   1. event trigger컴포넌트 추가
+      1. UI의 여러가지이벤트를 관리하는 컴포넌트
+   2. Add event 를하여
+      1. point down과 point up을 추가해준다.
+      2. 객체에는 카메라를 끌어다가 놓아준다.
+      3. 메서드 ScriptMachine.TriggerUnityEvent
+      4. 전달 스트링 RightDown 또는 LeftUp 등을조합
+5. Button Right를 복사 (Button Left)
+   1. pos x -23
+   2. 내부 Text방향 반대로
+   3. 내부이벤트 String 문자열 변경
+6. GameManager graph로 와서
+   1. Unity Event 4개 추가
+      1. 오타 체크
+   2. ![[Pasted image 20240806124822.png]]
+7. 테스트
+   1. 정상
+   2. 테스트중 아래 추가 script 추가
+
+#### 카메라 이동
+
+1. 카메라 그래프 내에서
+   1. ![[Pasted image 20240806130758.png]]
+   2. ![[Pasted image 20240806130807.png]]
+2. 테스트
+
+#### 페럴렉스
+
+1. 카메라는 잘 이동하는 데에 비해 멀리 있는사물이 고정되어 보임
+2. 2d에서 원근감을내도록 속도를 달리 해주는 기법
+3. script machine을 만들어준다. (Back)
+4. Back 1 내부부터 Back 을 넣어준다.
+   1. 카메라 이동후 그값을 참조하여 업데이트를 원하기에 late update 사용
+   2. Scene 급에 Camera 추가
+   3. Object 급에 Offset 이라는 변수 추가 (float)
+      1. 상대적인 속도를 반영에 영향을 줄 변수
+   4. Back 1(나무)에서 Offset의 값은 0.25
+   5. Back
+      1. ![[Pasted image 20240806133814.png]]
+   6. Back 2에도 붙여넣기 후
+      1. offset 0.5
+   7. Back 3(Sky)
+      1. offset 1
+      2. 카메라와 같은 속도로 이동
+5. 테스트
+   1. 정상
+
 ###
