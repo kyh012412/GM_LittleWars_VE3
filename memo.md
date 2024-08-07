@@ -287,37 +287,121 @@ https://www.youtube.com/watch?v=IONpYgEfk40&list=PLO-mt5Iu5TebYBC5jE3u5LyP2D7np0
    1. ![[Pasted image 20240806231700.png]]
 
 ### 캐주얼 디펜스 - ⚔️ 근거리 유닛 구현 [V20]
+
 #### 공격 구현
+
 1. BS에 script 변수에 Object 급에 해당하는 변수 선언
-	1. HP int 10
-	2. ATK int 2
+   1. HP int 10
+   2. ATK int 2
 2. BS > Attack 내로이동하여 공격시 atk를 받는대상에게 전달예정
-	1. ScanObj에게 damage를 넘기기 위해서 Custom Event 사용
-	2. ![[Pasted image 20240807080151.png]]
-	3. 이후 Next Action
+   1. ScanObj에게 damage를 넘기기 위해서 Custom Event 사용
+   2. ![[Pasted image 20240807080151.png]]
+   3. 이후 Next Action
+
 #### 피격 구현
+
 1. 피격을 구현할 script machine 생성
-	1. ![[Pasted image 20240807081936.png]]
-	2. ![[Pasted image 20240807081948.png]]
+   1. ![[Pasted image 20240807081936.png]]
+   2. ![[Pasted image 20240807081948.png]]
 2. BS의 Unit > Move graph로 돌아가서
-	1. Hit를 끌어다가 놓아주면 끝이다.
-		1. ![[Pasted image 20240807082224.png]]
-	2. 이 부분을 Attack,S 내에도 붙여넣기
+   1. Hit를 끌어다가 놓아주면 끝이다.
+      1. ![[Pasted image 20240807082224.png]]
+   2. 이 부분을 Attack,S 내에도 붙여넣기
+
 #### 죽음 상태구현
+
 1. BS graph 내에 Die state 추가
-	1. ![[Pasted image 20240807084130.png]]
+   1. ![[Pasted image 20240807084130.png]]
 2. Sprite renderer sorting layer 값 2로 변경
 3. ![[Pasted image 20240807084218.png]]
-4. 테스트 전 
-	1. 각 BS 와 RS내에 Object급으로 HP와 ATK가 필요하다.
-		1. 그렇지 않으면 에러 발생
+4. 테스트 전
+   1. 각 BS 와 RS내에 Object급으로 HP와 ATK가 필요하다.
+      1. 그렇지 않으면 에러 발생
+
 #### 방패병 만들기
+
 1. 하이라키에 BS 객체를 BG로 이름 변경
-	1. sprite renderer 의 sprite 변경 BG Idle
-	2. 런타임 애니메이션 컨트롤러 변경 AcBG
-	3. script mahcine 내에 Object급에 해당하는 변수 스펙을 변경해준다.
-	4. class Guard로 변경
+   1. sprite renderer 의 sprite 변경 BG Idle
+   2. 런타임 애니메이션 컨트롤러 변경 AcBG
+   3. script mahcine 내에 Object급에 해당하는 변수 스펙을 변경해준다.
+   4. class Guard로 변경
 2. RG도 유사하게 변경
 3. 테스트
+
+### 캐주얼 디펜스 - 🏹 원거리 유닛 구현 [V21]
+
+#### 투사체 만들기
+
+1. sprites > Characters 내에 BAA를 하이라키에 드래그
+2. 하이라키에 ArrowBlue라는 빈객체생성(ArrowBlue)
+   1. 이 객체 이하로 BAA를 옴겨준다.
+   2. 옴긴후 BAA의 y축값을 0.3올려준다.
+3. ArrowBlue 복사 (ArrowRed)
+   1. ArrowRed내의 BAA는 RAA로 교체 (이름 교체, 스프라이트 교체)
+   2. RAA의 FlipX 체크
+4. Particles 폴더내에 MagicRed와 MagicBlue를 하이라키내로 드래그
+5. Layer 설정을 해준다.
+   1. 자식객체에도 영향을 주는지에 대한 경고가뜨면 yes를 선택해준다.
+6. ArrowBlue에 Bullet이라는 Script machine을 추가해준다.
+   1. Object 급으로
+      1. Class (unit of my type) bullet
+      2. Speed라는 변수 추가 (float) 10
+         1. 레드팀의 경우 -10
+      3. IsHit (Boolean) false
+   2. ArrowRed와 MagicBlue, MagicRed에도 동일하게
+      1. script machine과 variables 적용
+      2. Magic 계열은 speed를 0으로 수정
+         1. 추후 이 값을 통해 arrow와 magic을 구분
+   3. 로직
+      1. ![[Pasted image 20240807114231.png]]
+      2. ![[Pasted image 20240807101706.png]]
+      3. ![[Pasted image 20240807114436.png]]
+7. Assets 내에 Prefabs 폴더를 만든뒤
+   1. Arrow와 Magic을 하나하나 드래그하여서 저장해준다.
+      1. Magic을 옴길때 어떤 경고창이 뜨면 original prefab을 골라준다.
+8. Base Blue(객체)에 script machine을 추가해준다.
+   1. Arrow와 Magic에 각각 prefab을 넣어준다.
+9. Base Red에도 유사하게 채워준다.
+10. Scene급 변수 추가
+    1. Blue에 Blue Base를 Red 에 Red Base를 연결해준다.
+
+#### 원거리 공격 구현
+
+1. 발사를 위한 슈퍼유닛 생성(Shot)
+   1. shot의 주체의 layer로 부터 Blue 또는 Red의 string을 가져와서
+   2. Base Blue 또는 Red까지 접근하여
+   3. input에 있는 name과 조합하여 진영에맞는 Arrow 또는 Magic을 생성
+   4. shot의 주체의 공격력을 가져와서 생성된 객체에 동일한 값 넣어주기까지
+   5. instanticate중 original position rotation의 값을 가지는 것을 선택
+   6. ![[Pasted image 20240807105121.png]]
+2. Unit graph로 돌아와서
+   1. Switch on Enum을 사용하여 분기처리
+   2. Attck state내에서
+      1. ![[Pasted image 20240807111051.png]]
+      2. ![[Pasted image 20240807111101.png]]
+      3. ![[Pasted image 20240807111111.png]]
+
+#### 궁수와 법사 만들기
+
+1. BA와 RA 만들어주기
+   1. 이름
+   2. sprite
+   3. ac 변경
+   4. class r
+   5. hp 5
+   6. ATK1
+   7. speed 1
+2. BW와 RW만들어주기
+   1. Blue 기준
+   2. -5.8,1.4
+   3. order in layer -1
+   4. 애니메이터
+   5. class w
+   6. hp1
+   7. speed 0
+   8. atk 1
+   9. 마법사 객체 이하의 dust는 삭제
+3. 테스트
+   1. BABW RARW를한개씩만 남기고 나머지를 지운후 테스트
 
 ###
