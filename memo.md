@@ -403,5 +403,118 @@ https://www.youtube.com/watch?v=IONpYgEfk40&list=PLO-mt5Iu5TebYBC5jE3u5LyP2D7np0
    9. 마법사 객체 이하의 dust는 삭제
 3. 테스트
    1. BABW RARW를한개씩만 남기고 나머지를 지운후 테스트
+### 캐주얼 디펜스 - 유닛 구매기능 구현 [V22]
+#### 블루팀 프리펩
+1. BW를 복사해준다. (BWU)
+	1. 이름
+	2. 스프라이트
+	3. ac
+	4. atk 2
+2. BAU
+	1. hp 8
+	2. atk2 
+	3. speed 1.5
+3. BGU
+	1. hp 45
+4. BSU
+	1. hp 15
+	2. atk3
+	3. speed 2
+5. prefab화 시키기전에
+	1. 법사를 제외한 나머지들은 x위치를 -5로 맞춰주기
+	2. Assets/Prefabs/Unit 폴더를 만들어주고 하나하나 옴겨준다.(프레펩화)
+6. 하이라키상에는 법사만 남기고 삭제
+	1. 법사들은 Base Blue 이하로 옴겨준다.
+	2. 그리고 비활성화 해준다.
+7. 각각마다 Dust가 잘 연결 되어있는지 확인한다.
+#### 레드팀 프리펩
+1. 로직 상 동일
+#### 유닛 UI 기틀잡기
+1. Control Set 이하에 빈객체 추가(Blue)
+	1. 앵커 좌하단
+	2. 가로 150 세로 70
+	3. grid layout group이라는 컴포넌트 추가
+		1. Cell Size : 칸하나가 찾이하는 크기
+			1. 30,30
+		2. Spacing 칸과 칸사이의 공간
+			1. 1,10
+		3. Start Axis (횡방향 또는 종방향으로 채울 방향)
+			1. Vertical (종방향 먼저 채우고 횡방향으로 1칸)
+		4. Child Ailgnment 
+			1. lower left
+2. Blue이하에 button 추가(Btn BW)
+	1. 이미지 소스 Panel
+	2. 이하텍스트삭제
+3. Btn BW이하에 이미지 추가(Portrait WZ)
+	1. 이미지 소스 Portrait WZ
+	2. set native size
+	3. 앵커 상단
+4. Btn BW에 script machine 추가(BtnUnit)
+	1. Object급에 변수추가
+		1. Level int 0
+		2. IsWizard boolean false
+		3. Unit aot list
+			1. + 두번
+			2. Game Object BW (를 prefab에서 끌어서 넣어준다.)
+			3. Game Object BWU(업그레이드가 인덱스 뒷쪽의 번호로)
+5. Btn BW에 button 컴포넌트에서 On Click 이벤트를 추가
+	1. 객체 자기자신 Button
+	2. 메서드 scriptmachine.triggerunityevent
+	3. Buy
+6. Blue (객체)에서 빈 객체 추가(Btn BWU)
+	1. Blue 내에서 순서를 Btn U먼저 그후 Button이 되게 바꿔준다.
+7. Btn BWU내에서 Button 추가(Btn U)
+	1. 앵커 아래쪽이 꽉차게
+	2. 높이 12
+	3. 좌우 3,3
+	4. 소스 이미지 panel
+	5. 이하의 텍스트 삭제
+	6. On Click에 아까만든 Btn BW을 연결
+		1. 객체 Btn BW
+		2. scriptmachine.triggerunityevent
+		3. Up
+8. Btn U내에 Image를 추가해준다.(Upgrade Image)
+	1. 소스 이미지 icon upgrade
+	2. set native size
+	3. pos y 3
+9. BW에 대한 한쌍의 버튼이 완성됨
+	1. ![[Pasted image 20240807201815.png]]
+#### 유닛 종류별 UI
+1. ![[Pasted image 20240807201915.png]]
+2. 추가로 만들어준 후 작업시작
+	1. BW, BA, BS, BG
+	2. ![[Pasted image 20240807202343.png]]
+	3. 위와 같이 바꿔주며 아래작업을 병행
+3. Btn BA의 내부에 Unit 에있는 2개의 오브젝트 변경
+	1. ![[Pasted image 20240807202107.png]]
+4. Btn BAU 내의 Onclick에 연결된 객체가 Btn BA인것을 확인 할 수 있다.
+5. Btn BA 이하의 Image 소스변경 Portrait A
+5. Btn BS 이하의 Image 소스변경 Portrait S
+5. Btn BG 이하의 Image 소스변경 Portrait G
+6. Btn BW의 Button 컴포넌트 비활성화
+	1. IsWizard boolean값 true
+	2. Unit에 있는 객체들을 prefabs이 아닌 Base Blue이하의 것들로 바꿔준다.
+	3. 대상을 눌렀을때 이런식으로 
+		1. ![[Pasted image 20240807202958.png]]
+		2. 활성화가 되어야한다.
+	4. Unit 리스트에 0번째에 인덱스를 추가해주고 Game Object에 None인것으로 넣어준다.
+		1. ![[Pasted image 20240807203130.png]]
+7. Blue 객체를 복사해준다. (Red)
+	1. 앵커 우상단
+	2. grid layout group 컴포넌트내에
+		1. Child Alignment 값을 Upper Right로 해준다.
+	3. Red 이하의 객체들의 이름을 전부 바꿔준다.
+	4. RW내에 Object에 잇는 변수값 바꿔주기
+	5. RA,RS,RG 내에 Object 값 바꿔주기
+8. Btn BW에 잇는 BtnUnit graph에서 작업
+#### 유닛 생산 구현
+1. Btn BW에 잇는 BtnUnit graph에서 작업
+	1. ![[Pasted image 20240807210305.png]]
+	2. ![[Pasted image 20240807210313.png]]
+	3. ![[Pasted image 20240807210322.png]]
+2. 테스트
+	1. 법사를 3번업그레이드하면 에러발생 (예외 처리 필요)
+3. 후처리
+	1. Red 팀의 앵커를 우하단에 배치한 후에
 
 ###
