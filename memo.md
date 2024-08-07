@@ -286,4 +286,38 @@ https://www.youtube.com/watch?v=IONpYgEfk40&list=PLO-mt5Iu5TebYBC5jE3u5LyP2D7np0
 2. Bs > Move 내에서
    1. ![[Pasted image 20240806231700.png]]
 
+### 캐주얼 디펜스 - ⚔️ 근거리 유닛 구현 [V20]
+#### 공격 구현
+1. BS에 script 변수에 Object 급에 해당하는 변수 선언
+	1. HP int 10
+	2. ATK int 2
+2. BS > Attack 내로이동하여 공격시 atk를 받는대상에게 전달예정
+	1. ScanObj에게 damage를 넘기기 위해서 Custom Event 사용
+	2. ![[Pasted image 20240807080151.png]]
+	3. 이후 Next Action
+#### 피격 구현
+1. 피격을 구현할 script machine 생성
+	1. ![[Pasted image 20240807081936.png]]
+	2. ![[Pasted image 20240807081948.png]]
+2. BS의 Unit > Move graph로 돌아가서
+	1. Hit를 끌어다가 놓아주면 끝이다.
+		1. ![[Pasted image 20240807082224.png]]
+	2. 이 부분을 Attack,S 내에도 붙여넣기
+#### 죽음 상태구현
+1. BS graph 내에 Die state 추가
+	1. ![[Pasted image 20240807084130.png]]
+2. Sprite renderer sorting layer 값 2로 변경
+3. ![[Pasted image 20240807084218.png]]
+4. 테스트 전 
+	1. 각 BS 와 RS내에 Object급으로 HP와 ATK가 필요하다.
+		1. 그렇지 않으면 에러 발생
+#### 방패병 만들기
+1. 하이라키에 BS 객체를 BG로 이름 변경
+	1. sprite renderer 의 sprite 변경 BG Idle
+	2. 런타임 애니메이션 컨트롤러 변경 AcBG
+	3. script mahcine 내에 Object급에 해당하는 변수 스펙을 변경해준다.
+	4. class Guard로 변경
+2. RG도 유사하게 변경
+3. 테스트
+
 ###

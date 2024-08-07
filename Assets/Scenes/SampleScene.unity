@@ -187,11 +187,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1951194dd6c93b7458a4425b33e87084, type: 3}
---- !u!1 &16696886 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7204429219805006232, guid: 1951194dd6c93b7458a4425b33e87084, type: 3}
-  m_PrefabInstance: {fileID: 16696885}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &16696887 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7204429219805006233, guid: 1951194dd6c93b7458a4425b33e87084, type: 3}
@@ -287,7 +282,7 @@ GameObject:
   - component: {fileID: 25400396}
   - component: {fileID: 25400395}
   m_Layer: 9
-  m_Name: RS
+  m_Name: RG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -322,12 +317,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"Class","value":{"$content":"Sword","$type":"MyType+Unit"},"typeHandle":{"Identification":"MyType+Unit,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"Speed","value":{"$content":-1.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
+    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"Class","value":{"$content":"Guard","$type":"MyType+Unit"},"typeHandle":{"Identification":"MyType+Unit,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"HP","value":{"$content":30,"$type":"System.Int32"},"typeHandle":{"Identification":"System.Int32,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"ATK","value":{"$content":1,"$type":"System.Int32"},"typeHandle":{"Identification":"System.Int32,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"Speed","value":{"$content":-1.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"Dust","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
       UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
     _objectReferences:
-    - {fileID: 1469246413}
+    - {fileID: 23062071}
 --- !u!61 &25400397
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -364,7 +361,7 @@ Animator:
   m_GameObject: {fileID: 25400394}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: e99e7a4c3fdf40843a496fb01fb0e1b8, type: 2}
+  m_Controller: {fileID: 22100000, guid: 37fddbbe69a94144ab0953d72418995f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -415,8 +412,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 8759150981705163766, guid: 4d701fb8bab94204e92af20e3e7b6a8a, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 6196606555088352618, guid: 4d701fb8bab94204e92af20e3e7b6a8a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -458,7 +455,7 @@ GameObject:
   - component: {fileID: 170371258}
   - component: {fileID: 170371257}
   m_Layer: 8
-  m_Name: BS
+  m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -504,8 +501,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -3154150011874791226, guid: 4d701fb8bab94204e92af20e3e7b6a8a, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: -5908743213997753785, guid: 4d701fb8bab94204e92af20e3e7b6a8a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -542,7 +539,7 @@ Animator:
   m_GameObject: {fileID: 170371252}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4e58d23a856186d459e0fdb527517a67, type: 2}
+  m_Controller: {fileID: 22100000, guid: 04263af6cf99e324cb75ac66ad8761b6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -608,8 +605,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"Class","value":{"$content":"Sword","$type":"MyType+Unit"},"typeHandle":{"Identification":"MyType+Unit,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"Speed","value":{"$content":1.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
+    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"Class","value":{"$content":"Guard","$type":"MyType+Unit"},"typeHandle":{"Identification":"MyType+Unit,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"HP","value":{"$content":30,"$type":"System.Int32"},"typeHandle":{"Identification":"System.Int32,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"ATK","value":{"$content":1,"$type":"System.Int32"},"typeHandle":{"Identification":"System.Int32,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"Speed","value":{"$content":1.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"Dust","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
       UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
     _objectReferences:
@@ -2524,9 +2523,11 @@ MonoBehaviour:
     _json: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"Class","value":{"$content":"Sword","$type":"MyType+Unit"},"typeHandle":{"Identification":"MyType+Unit,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"Speed","value":{"$content":1.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"Dust","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
-      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"HP","value":{"$content":10,"$type":"System.Int32"},"typeHandle":{"Identification":"System.Int32,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"ATK","value":{"$content":2,"$type":"System.Int32"},"typeHandle":{"Identification":"System.Int32,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
     _objectReferences:
-    - {fileID: 16696886}
+    - {fileID: 23062071}
 --- !u!61 &935427437
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2614,7 +2615,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -3154150011874791226, guid: 4d701fb8bab94204e92af20e3e7b6a8a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2825,11 +2826,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1951194dd6c93b7458a4425b33e87084, type: 3}
---- !u!1 &1177258715 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7204429219805006232, guid: 1951194dd6c93b7458a4425b33e87084, type: 3}
-  m_PrefabInstance: {fileID: 1177258714}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1177258716 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7204429219805006233, guid: 1951194dd6c93b7458a4425b33e87084, type: 3}
@@ -3209,9 +3205,11 @@ MonoBehaviour:
     _json: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"Class","value":{"$content":"Sword","$type":"MyType+Unit"},"typeHandle":{"Identification":"MyType+Unit,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"Speed","value":{"$content":-1.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"Dust","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
-      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"HP","value":{"$content":10,"$type":"System.Int32"},"typeHandle":{"Identification":"System.Int32,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"ATK","value":{"$content":2,"$type":"System.Int32"},"typeHandle":{"Identification":"System.Int32,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
     _objectReferences:
-    - {fileID: 1177258715}
+    - {fileID: 23062071}
 --- !u!61 &1293742646
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3299,7 +3297,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 8759150981705163766, guid: 4d701fb8bab94204e92af20e3e7b6a8a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -3656,11 +3654,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1951194dd6c93b7458a4425b33e87084, type: 3}
---- !u!1 &1469246413 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7204429219805006232, guid: 1951194dd6c93b7458a4425b33e87084, type: 3}
-  m_PrefabInstance: {fileID: 1469246412}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1469246414 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7204429219805006233, guid: 1951194dd6c93b7458a4425b33e87084, type: 3}
