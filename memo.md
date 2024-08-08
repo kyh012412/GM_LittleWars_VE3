@@ -678,4 +678,52 @@ https://www.youtube.com/watch?v=IONpYgEfk40&list=PLO-mt5Iu5TebYBC5jE3u5LyP2D7np0
        2. ![[Pasted image 20240808113953.png]]
 13. 테스트
 
+#### ai준비
+
+1. Base Red에 빈객체 생성(AI)
+2. script machine (AI) 추가
+   1. start 유닛 코루틴 체크
+   2. 객체급에 변수추가
+      1. Pattern int 0
+   3. wait until : 조건이 True가 될 때까지 기다리는 유닛
+   4. 객체급에 변수추가
+      1. Btn RS / game object / 드래그 드랍
+      2. Btn RA / game object / 드래그 드랍
+      3. Btn RG / game object / 드래그 드랍
+      4. Btn RW / game object / 드래그 드랍
+   5. ![[Pasted image 20240808124602.png]]
+3. 테스트 / 정상
+
+#### 첫 번째 패턴
+
+1. AI graph 내에서
+   1. ![[Pasted image 20240808125813.png]]
+   2. ![[Pasted image 20240808125825.png]]
+2. 테스트 / 정상
+
+#### 두번째 패턴
+
+1. 이번엔 selelct on integer가아닌 switch on integer사용
+2. ![[Pasted image 20240808131240.png]]
+   1. (switch문이 0일때는 위쪽 range로 재진입)
+3. ![[Pasted image 20240808131255.png]]
+4. 테스트 / 정상
+
+#### 세번째 패턴
+
+1. ![[Pasted image 20240808134016.png]]
+2. switch가 0일때와 if문이 false일때 pattern 2의 random 실행쪽으로 보낸다.
+3. 연산 후 pattern 변수 리셋
+   1. ![[Pasted image 20240808134101.png]]
+4. 전체 그래프
+5. ![[Pasted image 20240808134129.png]]
+6. 테스트
+
+#### 난이도 적용
+
+1. Base graph로 돌아와서
+   1. ![[Pasted image 20240808135257.png]]
+2. 팀별로 자원얻는량의변화를 준다.
+3. 테스트 / 정상
+
 ###
