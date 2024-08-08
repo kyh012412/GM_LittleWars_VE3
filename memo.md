@@ -403,118 +403,279 @@ https://www.youtube.com/watch?v=IONpYgEfk40&list=PLO-mt5Iu5TebYBC5jE3u5LyP2D7np0
    9. 마법사 객체 이하의 dust는 삭제
 3. 테스트
    1. BABW RARW를한개씩만 남기고 나머지를 지운후 테스트
+
 ### 캐주얼 디펜스 - 유닛 구매기능 구현 [V22]
+
 #### 블루팀 프리펩
+
 1. BW를 복사해준다. (BWU)
-	1. 이름
-	2. 스프라이트
-	3. ac
-	4. atk 2
+   1. 이름
+   2. 스프라이트
+   3. ac
+   4. atk 2
 2. BAU
-	1. hp 8
-	2. atk2 
-	3. speed 1.5
+   1. hp 8
+   2. atk2
+   3. speed 1.5
 3. BGU
-	1. hp 45
+   1. hp 45
 4. BSU
-	1. hp 15
-	2. atk3
-	3. speed 2
+   1. hp 15
+   2. atk3
+   3. speed 2
 5. prefab화 시키기전에
-	1. 법사를 제외한 나머지들은 x위치를 -5로 맞춰주기
-	2. Assets/Prefabs/Unit 폴더를 만들어주고 하나하나 옴겨준다.(프레펩화)
+   1. 법사를 제외한 나머지들은 x위치를 -5로 맞춰주기
+   2. Assets/Prefabs/Unit 폴더를 만들어주고 하나하나 옴겨준다.(프레펩화)
 6. 하이라키상에는 법사만 남기고 삭제
-	1. 법사들은 Base Blue 이하로 옴겨준다.
-	2. 그리고 비활성화 해준다.
+   1. 법사들은 Base Blue 이하로 옴겨준다.
+   2. 그리고 비활성화 해준다.
 7. 각각마다 Dust가 잘 연결 되어있는지 확인한다.
+
 #### 레드팀 프리펩
+
 1. 로직 상 동일
+
 #### 유닛 UI 기틀잡기
+
 1. Control Set 이하에 빈객체 추가(Blue)
-	1. 앵커 좌하단
-	2. 가로 150 세로 70
-	3. grid layout group이라는 컴포넌트 추가
-		1. Cell Size : 칸하나가 찾이하는 크기
-			1. 30,30
-		2. Spacing 칸과 칸사이의 공간
-			1. 1,10
-		3. Start Axis (횡방향 또는 종방향으로 채울 방향)
-			1. Vertical (종방향 먼저 채우고 횡방향으로 1칸)
-		4. Child Ailgnment 
-			1. lower left
+   1. 앵커 좌하단
+   2. 가로 150 세로 70
+   3. grid layout group이라는 컴포넌트 추가
+      1. Cell Size : 칸하나가 찾이하는 크기
+         1. 30,30
+      2. Spacing 칸과 칸사이의 공간
+         1. 1,10
+      3. Start Axis (횡방향 또는 종방향으로 채울 방향)
+         1. Vertical (종방향 먼저 채우고 횡방향으로 1칸)
+      4. Child Ailgnment
+         1. lower left
 2. Blue이하에 button 추가(Btn BW)
-	1. 이미지 소스 Panel
-	2. 이하텍스트삭제
+   1. 이미지 소스 Panel
+   2. 이하텍스트삭제
 3. Btn BW이하에 이미지 추가(Portrait WZ)
-	1. 이미지 소스 Portrait WZ
-	2. set native size
-	3. 앵커 상단
+   1. 이미지 소스 Portrait WZ
+   2. set native size
+   3. 앵커 상단
 4. Btn BW에 script machine 추가(BtnUnit)
-	1. Object급에 변수추가
-		1. Level int 0
-		2. IsWizard boolean false
-		3. Unit aot list
-			1. + 두번
-			2. Game Object BW (를 prefab에서 끌어서 넣어준다.)
-			3. Game Object BWU(업그레이드가 인덱스 뒷쪽의 번호로)
+   1. Object급에 변수추가
+      1. Level int 0
+      2. IsWizard boolean false
+      3. Unit aot list
+         1. - 두번
+         2. Game Object BW (를 prefab에서 끌어서 넣어준다.)
+         3. Game Object BWU(업그레이드가 인덱스 뒷쪽의 번호로)
 5. Btn BW에 button 컴포넌트에서 On Click 이벤트를 추가
-	1. 객체 자기자신 Button
-	2. 메서드 scriptmachine.triggerunityevent
-	3. Buy
+   1. 객체 자기자신 Button
+   2. 메서드 scriptmachine.triggerunityevent
+   3. Buy
 6. Blue (객체)에서 빈 객체 추가(Btn BWU)
-	1. Blue 내에서 순서를 Btn U먼저 그후 Button이 되게 바꿔준다.
+   1. Blue 내에서 순서를 Btn U먼저 그후 Button이 되게 바꿔준다.
 7. Btn BWU내에서 Button 추가(Btn U)
-	1. 앵커 아래쪽이 꽉차게
-	2. 높이 12
-	3. 좌우 3,3
-	4. 소스 이미지 panel
-	5. 이하의 텍스트 삭제
-	6. On Click에 아까만든 Btn BW을 연결
-		1. 객체 Btn BW
-		2. scriptmachine.triggerunityevent
-		3. Up
+   1. 앵커 아래쪽이 꽉차게
+   2. 높이 12
+   3. 좌우 3,3
+   4. 소스 이미지 panel
+   5. 이하의 텍스트 삭제
+   6. On Click에 아까만든 Btn BW을 연결
+      1. 객체 Btn BW
+      2. scriptmachine.triggerunityevent
+      3. Up
 8. Btn U내에 Image를 추가해준다.(Upgrade Image)
-	1. 소스 이미지 icon upgrade
-	2. set native size
-	3. pos y 3
+   1. 소스 이미지 icon upgrade
+   2. set native size
+   3. pos y 3
 9. BW에 대한 한쌍의 버튼이 완성됨
-	1. ![[Pasted image 20240807201815.png]]
+   1. ![[Pasted image 20240807201815.png]]
+
 #### 유닛 종류별 UI
+
 1. ![[Pasted image 20240807201915.png]]
 2. 추가로 만들어준 후 작업시작
-	1. BW, BA, BS, BG
-	2. ![[Pasted image 20240807202343.png]]
-	3. 위와 같이 바꿔주며 아래작업을 병행
+   1. BW, BA, BS, BG
+   2. ![[Pasted image 20240807202343.png]]
+   3. 위와 같이 바꿔주며 아래작업을 병행
 3. Btn BA의 내부에 Unit 에있는 2개의 오브젝트 변경
-	1. ![[Pasted image 20240807202107.png]]
+   1. ![[Pasted image 20240807202107.png]]
 4. Btn BAU 내의 Onclick에 연결된 객체가 Btn BA인것을 확인 할 수 있다.
 5. Btn BA 이하의 Image 소스변경 Portrait A
-5. Btn BS 이하의 Image 소스변경 Portrait S
-5. Btn BG 이하의 Image 소스변경 Portrait G
-6. Btn BW의 Button 컴포넌트 비활성화
-	1. IsWizard boolean값 true
-	2. Unit에 있는 객체들을 prefabs이 아닌 Base Blue이하의 것들로 바꿔준다.
-	3. 대상을 눌렀을때 이런식으로 
-		1. ![[Pasted image 20240807202958.png]]
-		2. 활성화가 되어야한다.
-	4. Unit 리스트에 0번째에 인덱스를 추가해주고 Game Object에 None인것으로 넣어준다.
-		1. ![[Pasted image 20240807203130.png]]
-7. Blue 객체를 복사해준다. (Red)
-	1. 앵커 우상단
-	2. grid layout group 컴포넌트내에
-		1. Child Alignment 값을 Upper Right로 해준다.
-	3. Red 이하의 객체들의 이름을 전부 바꿔준다.
-	4. RW내에 Object에 잇는 변수값 바꿔주기
-	5. RA,RS,RG 내에 Object 값 바꿔주기
-8. Btn BW에 잇는 BtnUnit graph에서 작업
+6. Btn BS 이하의 Image 소스변경 Portrait S
+7. Btn BG 이하의 Image 소스변경 Portrait G
+8. Btn BW의 Button 컴포넌트 비활성화
+   1. IsWizard boolean값 true
+   2. Unit에 있는 객체들을 prefabs이 아닌 Base Blue이하의 것들로 바꿔준다.
+   3. 대상을 눌렀을때 이런식으로
+      1. ![[Pasted image 20240807202958.png]]
+      2. 활성화가 되어야한다.
+   4. Unit 리스트에 0번째에 인덱스를 추가해주고 Game Object에 None인것으로 넣어준다.
+      1. ![[Pasted image 20240807203130.png]]
+9. Blue 객체를 복사해준다. (Red)
+   1. 앵커 우상단
+   2. grid layout group 컴포넌트내에
+      1. Child Alignment 값을 Upper Right로 해준다.
+   3. Red 이하의 객체들의 이름을 전부 바꿔준다.
+   4. RW내에 Object에 잇는 변수값 바꿔주기
+   5. RA,RS,RG 내에 Object 값 바꿔주기
+10. Btn BW에 잇는 BtnUnit graph에서 작업
+
 #### 유닛 생산 구현
+
 1. Btn BW에 잇는 BtnUnit graph에서 작업
-	1. ![[Pasted image 20240807210305.png]]
-	2. ![[Pasted image 20240807210313.png]]
-	3. ![[Pasted image 20240807210322.png]]
+   1. ![[Pasted image 20240807210305.png]]
+   2. ![[Pasted image 20240807210313.png]]
+   3. ![[Pasted image 20240807210322.png]]
 2. 테스트
-	1. 법사를 3번업그레이드하면 에러발생 (예외 처리 필요)
+   1. 법사를 3번업그레이드하면 에러발생 (예외 처리 필요)
 3. 후처리
-	1. Red 팀의 앵커를 우하단에 배치한 후에
+   1. Red 팀의 앵커를 우하단에 배치한 후에
+
+### 캐주얼 디펜스 - 실제 게임같은 💰자원 시스템 구현 [V23]
+
+#### 자원 시스템
+
+자원 개념 추가 예정
+
+1. 자원 시스템
+2. Base Blue에 Object급으로 변수 추가
+   1. Cost (int) 0
+   2. layer 변경
+3. Base Red도 동일
+   1. Cost (int) 0
+   2. layer 변경
+4. 매크로 폴더 내에 script machine 추가(Base)
+5. 독립적인 흐름을 위해 Start를 coroutine으로 설정
+6. wait for seconds 유닛을 추가
+7. ![[Pasted image 20240808081144.png]]
+
+#### 자원 바 UI
+
+1. Control Set > Blue 의 위치변경
+   1. pos x 6 pos y 9
+2. Control Set이하에 Image 추가 (Cost)
+   1. pos x 2 pos y 2
+   2. 150 : 10
+   3. 순서 조정
+      1. ![[Pasted image 20240808081536.png]]
+   4. 소스 이미지 bar back
+   5. layer blue
+3. Cost 내에 Image 추가(Bar)
+   1. 앵커 왼쪽부터 상하 꽉채우기
+   2. 가로 150
+   3. 소스 bar front
+   4. color f5bf63
+4. Cost내에 Text 추가(Cost Text)
+   1. 앵커 우상단
+   2. 가로 세로 0 0
+   3. 중앙정렬, 중앙정렬
+   4. overflow,overflow
+   5. 라벨 00
+   6. pos x -10 y -2
+   7. 네오 둥근모꼴
+   8. 볼드
+   9. 폰트크기 12
+5. Cost Text 복사 (Cost Shadow Text)
+   1. Cost Shadow Text는 Cost Text보다 위쪽에 배치시킨다.(하이라키기준)
+   2. pos y -2.5
+   3. 362a23
+
+#### 자원 로직 연결
+
+1. Script machine 생성 (TeamBase)(슈퍼유닛)
+   1. 외부에서 문자열을 받고
+   2. 현재 layer에따라 Base로부터 해당하는 오브젝트를 뽑아준다.
+   3. 만약에 문자열이 비면 해당하는 Base를 받는다.
+   4. ![[Pasted image 20240808083914.png]]
+2. Script machine 생성 (Bar)(Macro)
+   1. Cost > Bar 객체에 graph로 넣어주기
+   2. Object급 변수 추가
+      1. Var String Cost
+      2. Max int 10
+      3. Text / Text / Cost Text
+      4. Text Shadow / Text / Cost Shadow Text
+   3. Start 유닛 부터 시작
+   4. rect transform get size delta
+      1. 실제 UI크기를 가지고 있는 변수
+      2. 여기서 x,y가 폭과 높이가 됨
+   5. ![[Pasted image 20240808085030.png]]
+   6. ![[Pasted image 20240808090618.png]]
+   7. ![[Pasted image 20240808091030.png]]
+
+#### 구매 로직
+
+1. Control Set > Blue ,Red 의 layer를 UI가 아닌 각각 Blue,Red로 변경
+   1. children도 같이 바꾸기 에 yes
+2. 각 항목에 Cost 추가
+   1. Btn BW에 Cost 추가 int 0
+   2. Btn BA에 Cost 추가 int 5
+   3. Btn BS에 Cost 추가 int 3
+   4. Btn BG에 Cost 추가 int 7
+   5. Red 쪽도 동일
+3. 슈퍼 유닛 생성(Buy)
+   1. input output 추가
+   2. Check Cost
+   3. ![[Pasted image 20240808095525.png]]
+4. 다시 (Btn BW)BtnUnit으로 와서 Buy 그룹 수정
+   1. ![[Pasted image 20240808095829.png]]
+   2. ![[Pasted image 20240808101301.png]]
+   3. Late update 추가 예정
+   4. Select Unit
+      1. 참거짓에 따라 어떤 값을 선 가공
+   5. 각 객체마다 Object 급 변수추가
+      1. Btn U / Game Object / Btn \~\~U 내의 Btn U
+5. Cost > Bar 의 Layer를 Blue로 변경
+6. 테스트 / 정상
+
+#### 유닛 UI 구체화
+
+1. Control Set > Blue
+   1. pos x 6 pos y 9
+2. blue > Btn Bs > Image
+   1. pos y 12
+3. blue > Btn BS에 이미지 추가(HP)
+   1. 소스 icon hp
+   2. set native size
+   3. 앵커 아래
+   4. pos x -6 y 6
+4. HP > Text 추가 (HP Text)
+   1. 가로세로 0 0
+   2. 라벨 0
+   3. 둥근모꼴
+   4. 폰트크기 7
+   5. 중앙정렬, 중앙정렬
+   6. overflow overflow
+   7. 색상 하얀색
+   8. pos x 0.2
+5. HP 복사 (ATK)
+   1. pos x 6
+   2. 소스 icon atk
+6. ATK 복사 (Cost)
+   1. 소스 icon cost
+   2. pos x 0 y -4
+7. Cost > Text
+   1. 색상 b93600
+   2. pos y -0.5
+8. Btn Bs > Image(Portrait)에 script machine 추가 (embed)
+   1. Btn Bs(현재는) 를 graph내로 드래그해서 넣어준다. (새로운 유닛 생성됨)
+      1. 이것이 가능한 이유는 embed 타입이기 때문이다.
+      2. 매크로 타입은 불가능
+   2. ![[Pasted image 20240808111510.png]]
+9. 이 전체를 복사하여서 HP > Text에서도 사용 script machine embed
+   1. ![[Pasted image 20240808111933.png]]
+10. 전체를 복사하여 ATK > Text에서도 사용 embed
+    1. HP 부분만 ATK로 수정
+11. Cost > Text
+    1. ![[Pasted image 20240808112224.png]]
+12. Btn BA와 Btn BG,Btn BW에 대해서도
+    1. portrait hp,atk,cost에 관한 text 총 각각 4개씩 바꿔줘야한다.
+       1. portrait부터 각각 옴겨주고
+          1. BW의 경우에는 다음처럼 구성
+             1. ![[Pasted image 20240808112857.png]]
+       2. hp,atk,cost는 ctrl D로 복사후
+       3. 타객체로 이동후
+       4. pos 값을 조정하는 쪽이 편하다.
+       5. 각각의 객체내의 Text 내의 script graph가 참조하는 값들을 변경해준다.
+    2. Btn BW는 ATK만 있으면된다.
+       1. 내부로직도 null check가 필요하다.
+       2. ![[Pasted image 20240808113953.png]]
+13. 테스트
 
 ###
