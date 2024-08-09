@@ -726,4 +726,136 @@ https://www.youtube.com/watch?v=IONpYgEfk40&list=PLO-mt5Iu5TebYBC5jE3u5LyP2D7np0
 2. 팀별로 자원얻는량의변화를 준다.
 3. 테스트 / 정상
 
+### 캐주얼 디펜스 - 승리와 패배 [V25]
+#### 기지 체력 UI
+https://www.youtube.com/watch?v=sDXZxCHz1Ow&list=PLO-mt5Iu5TebYBC5jE3u5LyP2D7np0jJf&index=9
+1. Canvas > Game Set >이하에 빈객체 추가(Health Set)
+	1. 가로 세로 0 0
+	2. 앵커 상단
+	3. pos y -5
+2. Health Set내에 Image 추가(Center Image)
+	1. 소스 Health C
+	2. set native size
+	3. 앵커 상단
+	4. pos y 1
+3. Health Set내에 Image 추가(Blue Health)
+	1. 소스 bar front
+	2. 앵커 우상단
+	3. 60:14
+	4. pos x -8
+	5. Blue Health를 Center Image보다 하이라키상에 상단에 배치
+	6. Color 4599ff
+4. Blue Health에 빈객체 추가(End Pos)
+	1. 가로세로 0 0
+	2. pos x 2 pos y -0.5
+5. End Pos내에 Image 추가
+	1. 소스 Health L
+	2. set native size
+	3. 앵커 우측
+6. Image내에 Text 추가
+	1. 앵커 전체크기
+	2. top 0.5
+	3. 라벨 00
+	4. 폰트  크기 10
+	5. 중앙정렬 중앙정렬
+	6. 색상 힌색
+7. Text 복사 Text Shadow
+	1. Text Shadow을 더 상단으로 옴겨주기
+	2. top 2
+	3. 색상 315e96
+8. Blue Health를 복사 (Red Health)
+	1. 대칭이되도록 
+		1. 스프라이트 변경 위치 변경
+	2. 순서를 Center Image보다 올려준다.
+9. Blue Health 는 layer blue
+10. Red Health는 layer Red
+11. Blue Health에 script machine 추가 (Bar매크로 사용)
+	1. Object 급 변수에 다음처럼 값을 채워준다.
+	2. ![[Pasted image 20240808212839.png]]
+12. Red Health도 동일
+#### 기지 피격
+1. Base Blue에 Box collider 2d 컴포넌트 추가
+	1. offset 0,1 에서 0,0으로 변경
+	2. size 2,2 에서 0.5 0.5로 줄이기
+	3. is trigger 체크
+	4. Base Red에 적용
+2. Base Blue에 Particles 폴더 내에 있는 Destroy를 추가
+	1. 초기상태는 비활성화 상태
+4. Object급에 변수 추가
+	1. HP int 20
+	2. Normal Sprite / Sprite / base blue
+	3. Hit Sprite / Sprite / Base Blue Hit
+	4. Destroy Sprite / Sprite / Base Blue Destroy
+	5. Effect / game Object / (자식에 있는 Destroy를 넣어준다.)
+5. Base Red에도  동일하게 채워넣기
+6. Base graph 수정
+	1. 피격때
+		1. ![[Pasted image 20240808224624.png]]
+		2. ![[Pasted image 20240808224642.png]]
+		3. ![[Pasted image 20240808224649.png]]
+7. 테스트
+#### 유닛 관리
+1. Base Blue에 Object급 변수추가
+	1. UnitList / aot list / 
+		1. 2개의 gameObject를 만든뒤
+		2. Blue base 이하의 BW와 BWU를 끌어서 넣어준다.
+2. BtnUnit graph로 와서
+	1. ![[Pasted image 20240808230705.png]]
+	2. 구매시 리스트에 추간
+3. Unit > Die state내부로와서
+	1. ![[Pasted image 20240808231536.png]]
+4. 테스트
+#### 결과 UI
+1. Canvas > Game Set 에 Image 추가(Victory)
+	1. 소스 victory
+	2. set native size
+	3. scale 2,2,1
+	4. pos y 15
+	5. script machine 컴포넌트추가(title 사용)
+2.  Canvas > Game Set 에 Image 추가(Defeat)
+	1. 소스 Defeat
+	2. set native size
+	3. scale 2,2,1
+	4. pos y 15
+3.  Canvas > Game Set 에 Button 추가(Reset Button)
+	1. 가로 55 세로 25
+	2. pos y -20
+4. Reset Button> Text
+	1. bottom 2
+	2. 둥근모꼴
+	3. 폰트 크기 9
+	4. 라벨 돌아가기
+5. Victory,Defeat,Reset Button은 비활성화
+#### 엔딩처리
+1. GameManager추가
+	1. 위치초기화
+	2. script machine 추가(GameManager)
+	3. Object급 변수추가
+		1. Victory / game object / 
+		2. Defeat / game object
+		3. Reset / game object
+		4. ControlSet / game object
+	4. Scene급 변수추가
+		1. Manager / game object / gamemanager
+2. Base graph에서
+	1. Die그룹 이후 set active에 이어서
+		1. ![[Pasted image 20240809081539.png]]
+3. GameManager graph로 와서
+	1. Event를 받아준 UI처리
+		1. ![[Pasted image 20240809084348.png]]
+	2. 유닛 행동 비활성화
+		1. ![[Pasted image 20240809084405.png]]
+		2. ![[Pasted image 20240809084415.png]]
+	3. Reset 버튼이 눌렸을때의 script 정의 를해준다.
+		1. ![[Pasted image 20240809084856.png]]
+		2. Build Setting에 가서 Scene이 잘 들어가 있는지 확인 , Scene Name확인
+	4. reset 버튼이 눌렸을때 On Click 연결
+		1. ![[Pasted image 20240809085012.png]]
+4. Game Set UI를 다고 Menu Set UI를 열어준다.
+5. Game Clear시 메달을 달아주기로 했으므로 
+	1. GameManager graph로돌아와서 GameOver에서 Win 조건일시에 로직 수정
+	2. Result Setting 그룹 진행중
+		1. ![[Pasted image 20240809085557.png]]
+6. 테스트 / 정상
+
 ###
